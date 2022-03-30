@@ -37,8 +37,6 @@ function Dropzone(props) {
     isDragReject
   } = useDropzone({accept: 'video/*'});
 
-  const { colorMode } = useColorMode();
-
   const style = useMemo(() => ({
       ...{
         flex: 1,
@@ -48,11 +46,11 @@ function Dropzone(props) {
         padding: '80px',
         width: '90%',
         borderWidth: 2,
-        borderRadius: 2,
-        borderColor: borderColor[colorMode],
+        borderRadius: 8,
+        borderColor: 'black',
         borderStyle: 'dashed',
-        backgroundColor: bgColor[colorMode],
-        color: primaryTextColorAlt[colorMode],
+        backgroundColor: 'white',
+        color: 'black',
         outline: 'none',
         transition: 'border .24s ease-in-out'
     },

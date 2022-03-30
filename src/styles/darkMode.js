@@ -10,7 +10,7 @@ export const bgColorAlt = {
 
 export const secondaryBg = {
     dark: 'white',
-    light: 'gray.900'
+    light: 'gray.800'
 };
 
 export const primaryTextColor = {
