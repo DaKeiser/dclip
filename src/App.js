@@ -1,41 +1,24 @@
+import {   
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import Container from './components/Container'
+import Page1 from './pages/Page1'
+import Page2 from './pages/Page2'
+import UploadFile from "./pages/Upload";
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Container />} />
+      <Route path="/page1" element={<Page1 />} />
+      <Route path="/page2" element={<Page2 />} />
+      <Route path="/upload" element={<UploadFile />} />
+    </Routes>
+  </BrowserRouter>
   );
 }
 

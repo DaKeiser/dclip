@@ -1,14 +1,78 @@
-import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import {
+  ColorModeScript,
+  ColorModeProvider,
+  ChakraProvider,
+  useColorMode
+} from '@chakra-ui/react';
+import customTheme from './styles/theme'
+import { Global, css } from '@emotion/react'
+import WebFont from 'webfontloader';
+import { MoralisProvider } from "react-moralis";
+
+const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID
+const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL
+
+
+const GlobalStyle = ({ children }) => {
+  const { colorMode } = useColorMode()
+  WebFont.load({
+    google: {
+      families: ['Inter'],
+      urls: ['https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap']
+    }
+  });
+
+  return (
+    <>
+      <Global
+        styles={css`
+          ::selection {
+            background-color: #90CDF4;
+            color: #fefefe;
+          }
+          ::-moz-selection {
+            background: #ffb7b7;
+            color: #fefefe;
+          }
+          html {
+            min-width: 356px;
+            scroll-behavior: smooth;
+          }
+          #root {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: ${colorMode === 'light' ? 'white' : '#171717'};
+          }
+        `}
+      />
+      {children}
+    </>
+  )
+}
 
 ReactDOM.render(
   <StrictMode>
-    <ColorModeScript />
-    <App />
+    <ChakraProvider resetCSS theme={customTheme}>
+        <ColorModeProvider
+          options={{
+            initialColorMode: "light",
+            useSystemColorMode: false,
+          }}
+        >
+            <ColorModeScript />
+            <GlobalStyle>
+              <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+                  <App />
+              </MoralisProvider>
+            </GlobalStyle>
+        </ColorModeProvider>
+    </ChakraProvider>
   </StrictMode>,
   document.getElementById('root')
 );
