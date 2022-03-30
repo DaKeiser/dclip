@@ -1,19 +1,30 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState, useEffect} from 'react';
 import {useDropzone} from 'react-dropzone';
-import { useColorMode } from '@chakra-ui/react';
-import {
-  secondaryBg, 
-  primaryTextColor, 
-  primaryTextColorAlt, 
-  secondaryTextColor,
-  secondaryTextColorAlt,
-  borderColor,
-  borderColorAlt,
-  linkColor,
-  shadowColor,
-  bgColor,
-  bgColorAlt
-} from '../styles/darkMode'
+import { Image, HStack } from '@chakra-ui/react';
+
+const thumbsContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+};
+
+const thumb = {
+  display: 'inline-flex',
+  borderRadius: 10,
+  border: '1px solid #eaeaea',
+  marginBottom: 8,
+  marginRight: 150,
+  width: 100,
+  height: 100,
+  padding: 4,
+  boxSizing: 'border-box'
+};
+
+const thumbInner = {
+  display: 'flex',
+  minWidth: 0,
+  overflow: 'hidden'
+};
 
 
 const focusedStyle = {
@@ -29,13 +40,45 @@ const rejectStyle = {
 };
 
 function Dropzone(props) {
+  const [files, sf] = useState([]);
   const {
     getRootProps,
     getInputProps,
     isFocused,
     isDragAccept,
-    isDragReject
-  } = useDropzone({accept: 'video/*'});
+    isDragReject,
+    acceptedFiles
+  } = useDropzone({
+    accept: 'video/*',
+    onDrop: acceptedFiles => {
+      props.setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
+      sf(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
+    }
+  });
+
+  const thumbs = files.map(file => (
+    <div style={thumb} key={file.name}>
+      <HStack
+        spacing='100px'
+      >
+      <div style={thumbInner}>
+        <Image
+          src={file.preview}
+        />
+      </div>
+      <p>{file.name}</p>
+      </HStack>
+
+    </div>
+  ));
+
+  useEffect(() => {
+    files.forEach(file => URL.revokeObjectURL(file.preview));
+  }, [files]);
 
   const style = useMemo(() => ({
       ...{
@@ -67,7 +110,11 @@ function Dropzone(props) {
     <div className="container">
       <div {...getRootProps({style})}>
         <input {...getInputProps()} />
-        <p>Drop a video file here</p>
+          {acceptedFiles.length>0 ?       
+            <aside style={thumbsContainer}>
+              {thumbs}
+            </aside>:<p>Drop a video file here</p>
+          }
       </div>
     </div>
   );

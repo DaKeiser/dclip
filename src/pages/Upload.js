@@ -1,11 +1,8 @@
 import Container from '../components/Container'
 import { 
-    Image,
     Flex,
     Heading,
-    chakra,
     Link as ChakraLink,
-    Skeleton,
     InputGroup,
     InputRightAddon,
     Stack,
@@ -14,25 +11,27 @@ import {
     Box,
     Button,
     useColorMode,
-    color
+    color,
 } from '@chakra-ui/react'
 
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {
     secondaryBg, 
     primaryTextColor, 
     primaryTextColorAlt, 
     secondaryTextColor,
     secondaryTextColorAlt,
-    linkColor,
-    shadowColor
 } from '../styles/darkMode'
 
 import Dropzone from '../components/Dropzone'
 
+const submit = (files) => {
+    console.log(files)
+}
 
 export default function UploadFile() {
     const { colorMode } = useColorMode()
+    const [files, setFiles] = useState(null);
     return (
         <Container>
                 <Flex
@@ -42,6 +41,7 @@ export default function UploadFile() {
                     my={{ xl: '16' }}
                 >
                     <Flex
+                        direction={{ base: `column`, lg: `row` }}
                         bg={secondaryBg[colorMode]}
                         rounded={'xl'}
                     >
@@ -70,42 +70,45 @@ export default function UploadFile() {
                             mt={10}
                         >
                             <Stack spacing={4}>
-                            <Input
-                                placeholder="Title"
-                                bg={'gray.100'}
-                                border={0}
-                                color={secondaryTextColor[colorMode]}
-                                _placeholder={{
-                                    color: 'gray.500',
-                                }}
-                            />
-                            <Input
-                                placeholder="Description"
-                                bg={'gray.100'}
-                                border={0}
-                                color={secondaryTextColor[colorMode]}
-                                _placeholder={{
-                                    color: 'gray.500',
-                                }}
-                            />
-                            <InputGroup>                                
                                 <Input
-                                    placeholder="Base Price"
+                                    isRequired
+                                    placeholder="Title"
                                     bg={'gray.100'}
                                     border={0}
-                                    color={secondaryTextColor[colorMode]}
+                                    color='gray.900'
                                     _placeholder={{
-                                        color: 'gray.500',
+                                        color: secondaryTextColor[colorMode],
                                     }}
                                 />
-                                <InputRightAddon 
-                                    color={primaryTextColor[colorMode]}
-                                    bg={secondaryTextColorAlt[colorMode]}
-                                    children='MATIC' 
+                                <Input
+                                    placeholder="Description"
+                                    bg={'gray.100'}
+                                    border={0}
+                                    color='gray.900'
+                                    _placeholder={{
+                                        color: secondaryTextColor[colorMode],
+                                    }}
                                 />
-                            </InputGroup>
+                                <InputGroup>                                
+                                    <Input
+                                        isRequired
+                                        placeholder="Base Price"
+                                        bg={'gray.100'}
+                                        border={0}
+                                        color='gray.900'
+                                        _placeholder={{
+                                            color: secondaryTextColor[colorMode],
+                                        }}
+                                    />
+                                    <InputRightAddon 
+                                        color={primaryTextColor[colorMode]}
+                                        bg={secondaryTextColorAlt[colorMode]}
+                                        children='MATIC' 
+                                    />
+                                </InputGroup>
                             </Stack>
                             <Button
+                                onClick={() => submit(files)}
                                 fontFamily={'heading'}
                                 mt={8}
                                 w={'full'}
@@ -131,7 +134,7 @@ export default function UploadFile() {
                             my={{ base: 10, lg: 50 }}
                             color={primaryTextColorAlt[colorMode]}
                         >
-                            <Dropzone />
+                            <Dropzone setFiles={setFiles}/>
                         </Flex>
                     </Box>
                     </Flex>
