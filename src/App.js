@@ -14,11 +14,11 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Container />} />
+      <Route path="/" element={<Homepage />} />
       <Route path="/page1" element={<Page1 />} />
       <Route path="/post" element={<Post />} />
       <Route path="/upload" element={<UploadFile />} />
-      <Route path="/homepage" element={<Homepage />} />
+      <Route path="/home" element={<Homepage />} />
     </Routes>
   </BrowserRouter>
   );
