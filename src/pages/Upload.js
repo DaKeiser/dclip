@@ -48,7 +48,6 @@ export default function UploadFile() {
                     <Stack                        
                         p={{ base: 4, sm: 6, md: 8 }}
                         spacing={{ base: 8 }}
-                        maxW={{ lg: 'lg' }}
                     >
                         <Stack spacing={4}>
                             <Heading
