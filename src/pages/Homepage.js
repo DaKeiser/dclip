@@ -122,18 +122,6 @@ export default function Homepage() {
                         width={'full'}
                         overflow={'hidden'}
                     >
-                        <IconButton
-                            aria-label={'Play Button'}
-                            variant={'ghost'}
-                            _hover={{ bg: 'transparent' }}
-                            icon={<PlayIcon w={12} h={12} />}
-                            size={'lg'}
-                            color={'white'}
-                            position={'absolute'}
-                            left={'50%'}
-                            top={'50%'}
-                            transform={'translateX(-50%) translateY(-50%)'}
-                        />
                         <Box
                             aria-label={'Featured-tag'}
                             variant={'ghost'}
@@ -157,7 +145,7 @@ export default function Homepage() {
                             </Text>
                         </Box>
                         <Link
-                            href='https://chakra-ui.com' isExternal
+                            href='https://www.instagram.com/ArchanNair' isExternal
                         >
                             <Text 
                                 fontWeight={600} 
@@ -175,10 +163,12 @@ export default function Homepage() {
                                 w='40'
                                 _hover={{
                                     bgColor: 'gray.300',
-                                    bgClip: 'text'
+                                    bgClip: 'text',
+                                    'transition-duration': '0.25s',
+                                    'transition-timing-function': 'ease'
                                 }}
                             >
-                                <strong>@lindsey_jam3s</strong>
+                                <strong>@archannair</strong>
                             </Text>
                         </Link>
                         
@@ -190,7 +180,7 @@ export default function Homepage() {
                                 transform={'translateX(-3%) translateY(-90%)'}
                                 color={'white'}
                             >
-                                Loving the vibes
+                                Too trippy world!
                             </Text> 
                             <Text
                                 position={'absolute'}
@@ -199,7 +189,7 @@ export default function Homepage() {
                                 transform={'translateX(-3%) translateY(-90%)'}
                                 color={'white'}
                             >
-                                #vibes, #reels, #happy
+                                #trippy, #world, #vr
                             </Text> 
                         </Stack>                       
                         <Link
@@ -211,14 +201,14 @@ export default function Homepage() {
                                 top={'62%'}
                                 transform={'translateX(10%) translateY(-50%)'}
                                 size="md"
-                                src={"https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"}
+                                src={"/profile-pic-homepage.jpeg"}
                                 css={{
-                                    'border': '2px solid white',
-                                    // 'border-image-slice': 1,
-                                    // 'border-image-source': 'linear(to-r, red.400,pink.400)'
+                                    'border': '4px solid white',
                                 }}
                                 _hover={{
-                                    bgGradient: 'linear(to-r, red.400,pink.400)'
+                                    'border': '5px solid #F06292',
+                                    'transition-duration': '0.25s',
+                                    'transition-timing-function': 'ease'
                                 }}
                             />
                         </Link>
@@ -232,7 +222,7 @@ export default function Homepage() {
                                 updated?'linear(to-r, red.400,pink.400)':null
                             }
                             _hover={{
-                                bgGradient: 'linear(to-r, red.400,pink.400)'
+                                bgGradient: 'linear(to-r, red.400,pink.400)',
                             }}
                             onClick={updateLikes}
                         >
@@ -256,7 +246,7 @@ export default function Homepage() {
                             w={'100%'}
                             h={'100%'}
                             src={
-                            'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80'
+                            '/homepage.gif'
                             }
                         />
                     </Box>

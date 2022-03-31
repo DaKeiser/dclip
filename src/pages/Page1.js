@@ -43,7 +43,7 @@ const web3API = async() => {
     console.log(transaction);
 }
 
-web3API()
+// web3API()
 
 export default function bla() {
     return (
