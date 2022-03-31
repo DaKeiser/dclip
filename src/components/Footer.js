@@ -56,7 +56,7 @@ return (
                 <Text textAlign="center" fontSize="sm">
                     Built with{' '}
                     <chakra.span fontWeight="semibold" color={linkColor[colorMode]}>
-                        <a href="https://nextjs.org">Next.js</a>
+                        <a href="https://reactjs.org">React.js</a>
                     </chakra.span>{' '}
                     &{' '}
                     <chakra.span fontWeight="semibold" color={linkColor[colorMode]}>

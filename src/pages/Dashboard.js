@@ -1,11 +1,14 @@
-import { Button } from '@chakra-ui/react'
-import Container from '../components/Container'
-import Moralis from 'moralis'
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+// import Container from '../components/Container'
 
-export default function Index() {
+export default function Dashboard() {
   return (
-    <Container>
-      Page1
-    </Container>
-  )
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
+  );
 }

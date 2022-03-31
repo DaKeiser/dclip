@@ -35,7 +35,7 @@ const Login = () => {
                             bg: 'pink.300',
                         }}
                     >
-                        { user.get("username") }
+                        {truncateAddress(user.get("username"))}
                     </MenuButton>
                     <MenuList>
                             <MenuItem
