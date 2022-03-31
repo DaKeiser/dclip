@@ -5,7 +5,7 @@ import Moralis from 'moralis'
 export default function Index() {
   return (
     <Container>
-        Page 2
+      Page1
     </Container>
   )
 }
