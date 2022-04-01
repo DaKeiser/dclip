@@ -1,5 +1,7 @@
 import Container from '../components/Container'
-import { 
+import VodApi from '../utils/LivepeerApi'
+
+import {
     Flex,
     Heading,
     Link as ChakraLink,
@@ -14,132 +16,197 @@ import {
     color,
 } from '@chakra-ui/react'
 
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
-    secondaryBg, 
-    primaryTextColor, 
-    primaryTextColorAlt, 
+    secondaryBg,
+    primaryTextColor,
+    primaryTextColorAlt,
     secondaryTextColor,
     secondaryTextColorAlt,
 } from '../styles/darkMode'
 
 import Dropzone from '../components/Dropzone'
 
-const submit = (files) => {
-    console.log(files)
+const api = new VodApi(process.env.REACT_APP_API_KEY, process.env.REACT_APP_API_ENDPOINT);
+
+const submit = async(files) => {
+    console.log(api, files)
+    let assetName = "testing1234"
+    let metadata = `{
+        "attributes" : "1 v 4 clutch on Icebox",
+        "owner" : "Saksham"
+    }`
+
+    console.log('1. Requesting upload URL... ');
+    const {
+        url: uploadUrl,
+        asset: { id: assetId },
+        task: importTask
+    } = await api.requestUploadUrl(assetName);
+    console.log(`Pending asset with id=${assetId}`);
+
+    console.log('2. Uploading file...');
+    await api.uploadFile(uploadUrl, files);
+    await api.waitTask(importTask);
+
+    let asset = await api.getAsset(assetId || '');
+
+    console.log('3. Starting export... ');
+    let { task: exportTask } = await api.exportAsset(
+        asset.id || '',
+        JSON.parse(metadata)
+    );
+    console.log(`Created export task with id=${exportTask.id}`);
+    exportTask = await api.waitTask(exportTask);
+
+    const result = exportTask.output
+    console.log(
+        `4. Export successful! Result: \n${JSON.stringify(result, null, 2)}`
+    );
+
+    return new Promise(async(resolve, reject) => {
+        resolve(result);
+    });
+
+    console.log(
+        `5. Mint your NFT at:\n` +
+        `https://livepeer.com/mint-nft?tokenUri=${result?.nftMetadataUrl}`
+    );
 }
 
 export default function UploadFile() {
     const { colorMode } = useColorMode()
     const [files, setFiles] = useState(null);
-    return (
-        <Container>
-                <Flex
-                    direction={{ base: `column`, lg: `row` }}
-                    alignItems='center'
-                    mx='auto'
-                    my={{ xl: '16' }}
-                >
-                    <Flex
-                        direction={{ base: `column`, lg: `row` }}
-                        bg={secondaryBg[colorMode]}
-                        rounded={'xl'}
-                    >
-                    <Stack                        
-                        p={{ base: 4, sm: 6, md: 8 }}
-                        spacing={{ base: 8 }}
-                        maxW={{ lg: 'lg' }}
-                    >
-                        <Stack spacing={4}>
-                            <Heading
-                                color={primaryTextColorAlt[colorMode]}
-                                lineHeight={1.1}
-                                fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}
-                            >
-                                Upload your file!
-                            </Heading>
-                            <Text 
-                                color={secondaryTextColorAlt[colorMode]}
-                                fontSize={{ base: 'sm', sm: 'md' }}
-                            >
-                                Fill in the details below and drop the file beside and you are good to go!
-                            </Text>
-                        </Stack>
-                        <Box 
-                            as={'form'} 
-                            mt={10}
-                        >
-                            <Stack spacing={4}>
-                                <Input
-                                    isRequired
-                                    placeholder="Title"
-                                    bg={'gray.100'}
-                                    border={0}
-                                    color='gray.900'
-                                    _placeholder={{
-                                        color: secondaryTextColor[colorMode],
-                                    }}
-                                />
-                                <Input
-                                    placeholder="Description"
-                                    bg={'gray.100'}
-                                    border={0}
-                                    color='gray.900'
-                                    _placeholder={{
-                                        color: secondaryTextColor[colorMode],
-                                    }}
-                                />
-                                <InputGroup>                                
-                                    <Input
-                                        isRequired
-                                        placeholder="Base Price"
-                                        bg={'gray.100'}
-                                        border={0}
-                                        color='gray.900'
-                                        _placeholder={{
-                                            color: secondaryTextColor[colorMode],
-                                        }}
-                                    />
-                                    <InputRightAddon 
-                                        color={primaryTextColor[colorMode]}
-                                        bg={secondaryTextColorAlt[colorMode]}
-                                        children='MATIC' 
-                                    />
-                                </InputGroup>
-                            </Stack>
-                            <Button
-                                onClick={() => submit(files)}
-                                fontFamily={'heading'}
-                                mt={8}
-                                w={'full'}
-                                bgGradient="linear(to-r, red.400,pink.400)"
-                                color={'white'}
-                                _hover={{
-                                    bgGradient: 'linear(to-r, red.400,pink.400)',
-                                    boxShadow: 'xl',
-                            }}>
-                                Upload
-                            </Button>
-                        </Box>
-                    </Stack>
-                    <Box 
-                        minWidth={500}
-                        alignSelf='center'
-                        direction='column'
-                    >
-                        <Flex
-                            alignSelf='center'
-                            direction='column'
-                            pl={{ base: 0, lg: 10 }}
-                            my={{ base: 10, lg: 50 }}
-                            color={primaryTextColorAlt[colorMode]}
-                        >
-                            <Dropzone setFiles={setFiles}/>
-                        </Flex>
-                    </Box>
-                    </Flex>
-                </Flex>
-            
-        </Container>
+    return ( <
+        Container >
+        <
+        Flex direction = {
+            { base: `column`, lg: `row` }
+        }
+        alignItems = 'center'
+        mx = 'auto'
+        my = {
+            { xl: '16' }
+        } >
+        <
+        Flex direction = {
+            { base: `column`, lg: `row` }
+        }
+        bg = { secondaryBg[colorMode] }
+        rounded = { 'xl' } >
+        <
+        Stack p = {
+            { base: 4, sm: 6, md: 8 }
+        }
+        spacing = {
+            { base: 8 }
+        }
+        maxW = {
+            { lg: 'lg' }
+        } >
+        <
+        Stack spacing = { 4 } >
+        <
+        Heading color = { primaryTextColorAlt[colorMode] }
+        lineHeight = { 1.1 }
+        fontSize = {
+            { base: '2xl', sm: '3xl', md: '4xl' }
+        } >
+        Upload your file!
+        <
+        /Heading> <
+        Text color = { secondaryTextColorAlt[colorMode] }
+        fontSize = {
+            { base: 'sm', sm: 'md' }
+        } >
+        Fill in the details below and drop the file beside and you are good to go!
+        <
+        /Text> < /
+        Stack > <
+        Box as = { 'form' }
+        mt = { 10 } >
+        <
+        Stack spacing = { 4 } >
+        <
+        Input isRequired placeholder = "Title"
+        bg = { 'gray.100' }
+        border = { 0 }
+        color = 'gray.900'
+        _placeholder = {
+            {
+                color: secondaryTextColor[colorMode],
+            }
+        }
+        /> <
+        Input placeholder = "Description"
+        bg = { 'gray.100' }
+        border = { 0 }
+        color = 'gray.900'
+        _placeholder = {
+            {
+                color: secondaryTextColor[colorMode],
+            }
+        }
+        /> <
+        InputGroup >
+        <
+        Input isRequired placeholder = "Base Price"
+        bg = { 'gray.100' }
+        border = { 0 }
+        color = 'gray.900'
+        _placeholder = {
+            {
+                color: secondaryTextColor[colorMode],
+            }
+        }
+        /> <
+        InputRightAddon color = { primaryTextColor[colorMode] }
+        bg = { secondaryTextColorAlt[colorMode] }
+        children = 'MATIC' /
+        >
+        <
+        /InputGroup> < /
+        Stack > <
+        Button onClick = {
+            () => submit(files)
+        }
+        fontFamily = { 'heading' }
+        mt = { 8 }
+        w = { 'full' }
+        bgGradient = "linear(to-r, red.400,pink.400)"
+        color = { 'white' }
+        _hover = {
+            {
+                bgGradient: 'linear(to-r, red.400,pink.400)',
+                boxShadow: 'xl',
+            }
+        } >
+        Upload <
+        /Button> < /
+        Box > <
+        /Stack> <
+        Box minWidth = { 500 }
+        alignSelf = 'center'
+        direction = 'column' >
+        <
+        Flex alignSelf = 'center'
+        direction = 'column'
+        pl = {
+            { base: 0, lg: 10 }
+        }
+        my = {
+            { base: 10, lg: 50 }
+        }
+        color = { primaryTextColorAlt[colorMode] } >
+        <
+        Dropzone setFiles = { setFiles }
+        /> < /
+        Flex > <
+        /Box> < /
+        Flex > <
+        /Flex>
+
+        <
+        /Container>
     )
 }
