@@ -35,10 +35,8 @@ export default function UploadFile() {
     return (
         <Container>
                 <Flex
-                    direction={{ base: `column`, lg: `row` }}
                     alignItems='center'
                     mx='auto'
-                    my={{ xl: '16' }}
                 >
                     <Flex
                         direction={{ base: `column`, lg: `row` }}
@@ -127,10 +125,11 @@ export default function UploadFile() {
                         direction='column'
                     >
                         <Flex
-                            alignSelf='center'
                             direction='column'
                             pl={{ base: 0, lg: 10 }}
                             my={{ base: 10, lg: 50 }}
+                            mx='auto'
+                            alignItems='center'
                             color={primaryTextColorAlt[colorMode]}
                         >
                             <Dropzone setFiles={setFiles}/>
