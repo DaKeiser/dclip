@@ -4,12 +4,13 @@ import {
   Route,
 } from "react-router-dom";
 import React from 'react';
-import Container from './components/Container'
 import Page1 from './pages/Page1'
 import Post from './pages/Post'
 import UploadFile from "./pages/Upload";
 import Homepage from "./pages/Homepage"
 import Profile from "./pages/Profile";
+import Dashboard from "./pages/Dashboard";
+import PageNotFound from "./pages/PageNotFound"
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
       <Route path="/upload" element={<UploadFile />} />
       <Route path="/home" element={<Homepage />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   </BrowserRouter>
   );
