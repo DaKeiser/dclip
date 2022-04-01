@@ -9,9 +9,9 @@ export default function Profile() {
 	const [imageLoad, setImageLoad] = useState(false);
 	var srces = []
 	for(var i=0;i<20;i++) {
-	  var h = parseInt(Math.random() * 500)
-	  var w = parseInt(Math.random() * 500)
-	  srces.push(`https://picsum.photos/${w}/${h}`)
+	  	var h = parseInt(Math.random() * 500)
+	  	var w = parseInt(Math.random() * 500)
+		srces.push(`https://picsum.photos/${w}/${h}`)
 	}
     return (
 		<Container>
