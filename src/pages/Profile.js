@@ -1,72 +1,109 @@
-import { Box, Button, Circle, GridItem, HStack, Stack, Image, Grid, Square, Text, VStack, Spacer, Avatar, Divider } from '@chakra-ui/react'
+import { Box, Button, Circle, GridItem, Heading, Center, HStack, IconButton, ButtonGroup, Stack, Skeleton, Image, Grid, Square, Text, VStack, Spacer, Avatar, Divider, Flex, useColorMode } from '@chakra-ui/react'
 import Container from '../components/Container'
-import { AiOutlineHeart, AiFillHeart, AiFillShopping, AiTwotoneMessage, AiOutlineShareAlt } from "react-icons/ai";
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
+import { primaryTextColor, secondaryBg, secondaryTextColor } from '../styles/darkMode'
+import React, {useState} from 'react';
 
 export default function Profile() {
-
-  var srces = []
-  for(var i=0;i<20;i++) {
-    var h = parseInt(Math.random() * 500)
-    var w = parseInt(Math.random() * 500)
-    srces.push(`https://picsum.photos/${w}/${h}`)
-  }
-
-  console.log(srces)
-  return (
-    <Container>
-      <Grid
-        templateColumns='repeat(12, 1fr)'
-        // templateColumns='repeat(5, 1fr)'
-        width="100%"
-      >
-        <GridItem colSpan={3} w="100%">
-          <Box width="100%">
-            <VStack pl="40%" pt="20%">
-              <Box borderRadius='lg' w="200px" borderWidth={2} overflow='hidden'>
-                <Image src="https://picsum.photos/200/200" ></Image>
-                <Stack direction={'row'} justify={'center'} spacing={6}>
-                  <Stack spacing={0} align={'center'} p={2}>
-                    <Text fontWeight={600}>23k</Text>
-                    <Text fontSize={'sm'} color={'gray.500'}>
-                      Followers
-                    </Text>
-                  </Stack>
-
-                  <Stack spacing={0} align={'center'} p={2}>
-                    <Text fontWeight={600}>23k</Text>
-                    <Text fontSize={'sm'} color={'gray.500'}>
-                      Followers
-                    </Text>
-                  </Stack>
-                </Stack>
-                {/* </Box> */}
-              </Box>
-            </VStack>
-          </Box>
-        </GridItem>
-
-        <GridItem colSpan={9} w="100%">
-          
-          <Box width="100%" pt="5%">
-            <Text fontSize='4xl' fontWeight={800} mb={3}>Magnificient Piece of Shit</Text>
-            <Box
-              padding={4}
-              pl={0}
-              overflow='hidden'
-              w="100%"
-              maxW="900px"
-              mx="auto"
-              // bg="gray.800"
-              sx={{ columnCount: [1, 2, 3], columnGap: "8px" }}
-              ml={1}
-            >
-              {srces.map((src) => (
-                <Box borderRadius="lg" bg="tomato" h={parseInt(src.slice(-3))} d="inline-block" w="100%" mb={2}>{src.slice(-3)}</Box>
-              ))}
-            </Box>
-          </Box>
-        </GridItem>
-      </Grid>
-    </Container>
-  )
+	const { colorMode } = useColorMode();
+	const [imageLoad, setImageLoad] = useState(false);
+	var srces = []
+	for(var i=0;i<20;i++) {
+	  	var h = parseInt(Math.random() * 500)
+	  	var w = parseInt(Math.random() * 500)
+		srces.push(`https://picsum.photos/${w}/${h}`)
+	}
+    return (
+		<Container>
+			<Stack
+				direction={{ base: 'column', lg: 'row' }}
+				spacing={{ base: '8', lg: '10' }}
+			>
+				{/* User Profile image flex */}
+				<Stack
+					direction={{ base: 'column' }}
+					rounded={'xl'}
+					spacing={4}
+					alignItems={'center'}
+				>
+					{/* User Image */}
+					<Skeleton isLoaded={imageLoad} boxSize='220px' borderRadius='lg'>
+						<Image
+							borderRadius='lg'
+							boxSize='260px'
+							src='pp.jpeg'
+							objectFit='cover'
+							alt='profile-pic'
+							onLoad={() => setImageLoad(true)}
+						/>
+					</Skeleton>						
+					{/* Created and Owned Flex */}						
+					<Box p={1} shadow='md' borderWidth='1px' borderRadius='lg'>
+						<Stack direction={'row'} justify={'center'} spacing={6} height='48px'>
+							<Stack spacing={0} align={'center'}>
+								<Text fontWeight={600}>29</Text>
+								<Text fontSize={'sm'} color={'gray.500'}>
+									<strong>Created</strong>
+								</Text>
+							</Stack>
+							<Divider orientation='vertical' borderColor={colorMode=='light'?'gray.400':'gray.500'}/>
+							<Stack spacing={0} align={'center'}>
+								<Text fontWeight={600}>34</Text>
+								<Text fontSize={'sm'} color={'gray.500'}>
+									<strong>Owned</strong>
+								</Text>
+							</Stack>
+						</Stack>
+					</Box>
+					<Stack spacing='1'>
+						<ButtonGroup variant="ghost" color="gray.600" justifyContent={'center'}>
+							<IconButton borderRadius='10px' as="a" href="https://www.facebook.com/" aria-label="fb" icon={<FaFacebook fontSize="20px" />} />
+							<IconButton borderRadius='10px' as="a" href="https://www.twitter.com/" aria-label="twitter" icon={<FaTwitter fontSize="20px" />} />
+							<IconButton borderRadius='10px' as="a" href="https://instagram.com/" aria-label="insta" icon={<FaInstagram fontSize="20px" />} />
+						</ButtonGroup>
+						<Center><strong><Text fontSize='xs'>Follow On</Text></strong></Center>
+					</Stack>
+				</Stack>
+				{/* Username, socials, display flex */}
+				<Flex
+					alignItems='center'
+					direction={{ base: 'column', lg: 'column' }}
+				>
+					{/* Username, socials flex */}
+					<Flex>
+						<Box p={5} w={{ sm: '220px', md: '480px', lg: '980px' }} shadow='md' borderWidth='1px' borderRadius='lg'>
+							<Heading fontSize='3xl'
+								bgGradient='radial(rgba(113,132,193,1), rgba(255,0,56,1))'
+								bgClip='text'
+							>
+								@username
+							</Heading>
+							<Text mt={4}>
+								(metamask wallet address)
+							</Text>
+						</Box>
+					</Flex>
+					{/* Masonry flex */}
+					<Flex>
+						<Box width="100%" pt="5%">
+							<Box
+								padding={4}
+								pl={0}
+								overflow='hidden'
+								w="100%"
+								maxW="900px"
+								mx="auto"
+								sx={{ columnCount: [1, 2, 3], columnGap: "8px" }}
+								ml={1}
+							>
+								{srces.map((src) => (
+									<Box borderRadius="lg" Box shadow='md' borderWidth='1px' h={parseInt(src.slice(-3))} d="inline-block" w="100%" mb={2}>{src.slice(-3)}</Box>
+								))}
+							</Box>
+						</Box>
+					</Flex>
+				</Flex>
+			</Stack>
+		</Container>
+	)
 }

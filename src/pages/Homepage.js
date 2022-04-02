@@ -91,15 +91,18 @@ export default function Homepage() {
                             How It Works
                         </Button>
                         <Button
+                            as={Link}                            
                             rounded={'full'}
                             size={'lg'}
                             fontWeight={'normal'}
                             px={6}
                             bgGradient="linear(to-r, red.400,pink.400)"
                             color={'white'}
+                            href="/signup" 
                             _hover={{
                                 bgGradient: 'linear(to-r, red.600,pink.600)',
-                                boxShadow: 'xl'
+                                boxShadow: 'xl',
+                                textDecoration: 'none'
                         }}>
                             Get started
                         </Button>

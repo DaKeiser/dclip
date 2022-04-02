@@ -1,18 +1,20 @@
 import { Box, Button, Circle, GridItem, HStack, Image, Grid, Square, Text, VStack, Spacer, Avatar } from '@chakra-ui/react'
 import Container from '../components/Container'
 import { AiOutlineHeart, AiFillHeart, AiFillShopping, AiTwotoneMessage, AiOutlineShareAlt } from "react-icons/ai";
+import { secondaryTextColor } from '../styles/darkMode';
+import React, {useColorMode} from '@chakra-ui/react'
 
 export default function Post() {
+  const { colorMode } = useColorMode();
   return (
     <Container>
       <Grid
         templateColumns='repeat(12, 1fr)'
-        // templateColumns='repeat(5, 1fr)'
         width="100%"
       >
-        <GridItem colSpan={3} w="100%">
+        <GridItem colSpan={[1, 2, 3]} w="100%">
           <Box width="100%">
-            <VStack pt="50%" pl="60%">
+            <VStack pt="10%">
               <Button bg='lightgreen'>
                 <AiFillShopping />
               </Button>
@@ -30,8 +32,13 @@ export default function Post() {
         </GridItem>
 
         <GridItem colSpan={6} w="100%">
-          <Box width="100%" m={12}>
+          <Box width="100%">
             <Text fontSize='4xl' fontWeight={800} mb={3}>Magnificient Piece of Shit</Text>
+            <Text fontSize='sm' fontWeight={300} mb={7} color={secondaryTextColor[colorMode]}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Quisque sit amet est sed turpis commodo varius. Duis in consectetur sem, sed facilisis sem. 
+              Integer pulvinar odio non nisi posuere sagittis. 
+            </Text>
 
             <Box display='flex'>
               <Box display='flex' mb={3}>
@@ -62,25 +69,25 @@ export default function Post() {
           <Box width="100%">
             <Text fontSize="3xl">Recommended</Text>
             <VStack>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
             </VStack>
           </Box>
