@@ -11,6 +11,7 @@ import Homepage from "./pages/Homepage"
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import PageNotFound from "./pages/PageNotFound"
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/home" element={<Homepage />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   </BrowserRouter>

@@ -27,14 +27,14 @@ export default function Dashboard() {
 					css={{
 						'&::-webkit-scrollbar': {
 							width: '4px',
-					  	},
+					},
 						'&::-webkit-scrollbar-track': {
 							width: '6px',
-					  	},
+					},
 						'&::-webkit-scrollbar-thumb': {
 							background: primaryTextColor[colorMode],
 							borderRadius: '24px',
-					  	},
+					},
 					}}>
 					<HStack my={5} spacing='15px' >
 						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>

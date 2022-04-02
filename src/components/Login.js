@@ -12,7 +12,7 @@ import { useMoralis } from "react-moralis";
 import { primaryTextColor } from '../styles/darkMode';
 
 const truncateAddress = (address) => {
-    return address.slice(0, 6) + "..." + address.slice(-4);
+    return address.length>10 ? address.slice(0, 6) + "..." + address.slice(-4): address;
 };
 
 const Login = () => {
