@@ -34,7 +34,7 @@ return (
     role="contentinfo"
     mx="auto"
     maxW="7xl"
-    py="12"
+    py="10"
     px={{
         base: '4',
         md: '8',

@@ -1,3 +1,4 @@
+import { useMoralis } from "react-moralis";
 import Container from '../components/Container'
 import VodApi from '../utils/LivepeerApi'
 
@@ -29,8 +30,13 @@ import Dropzone from '../components/Dropzone'
 
 const api = new VodApi(process.env.REACT_APP_API_KEY, process.env.REACT_APP_API_ENDPOINT);
 
+const UserDetails = () => {
+    const { refetchUserData, isUserUpdating, userError, user } = useMoralis();
+    return { refetchUserData, isUserUpdating, userError, user }
+}
+
 const submit = async(files) => {
-    console.log(api, files)
+    // console.log(user)
     let assetName = "testing1234"
     let metadata = `{
         "attributes" : "1 v 4 clutch on Icebox",
@@ -46,7 +52,7 @@ const submit = async(files) => {
     console.log(`Pending asset with id=${assetId}`);
 
     console.log('2. Uploading file...');
-    await api.uploadFile(uploadUrl, files);
+    await api.uploadFile(uploadUrl, files[0]);
     await api.waitTask(importTask);
 
     let asset = await api.getAsset(assetId || '');
@@ -59,24 +65,32 @@ const submit = async(files) => {
     console.log(`Created export task with id=${exportTask.id}`);
     exportTask = await api.waitTask(exportTask);
 
-    const result = exportTask.output
+    const result = exportTask.output.export.ipfs
     console.log(
         `4. Export successful! Result: \n${JSON.stringify(result, null, 2)}`
     );
 
-    return new Promise(async(resolve, reject) => {
-        resolve(result);
-    });
+    console.log()
+    console.log("Returning NFT MEtadata as ", JSON.parse(JSON.stringify(result))["nftMetadataUrl"])
+    return result['nftMetadataUrl']
 
-    console.log(
-        `5. Mint your NFT at:\n` +
-        `https://livepeer.com/mint-nft?tokenUri=${result?.nftMetadataUrl}`
-    );
+    // console.log(
+    //     `5. Mint your NFT at:\n` +
+    //     `https://livepeer.com/mint-nft?tokenUri=${result?.nftMetadataUrl}`
+    // );
+
+
 }
 
 export default function UploadFile() {
     const { colorMode } = useColorMode()
     const [files, setFiles] = useState(null);
+    const [posts, setPosts] = useState([]);
+
+    const { setUserData, refetchUserData, isUserUpdating, userError, user, isAuthenticated } = useMoralis();
+    // if (isAuthenticated) {
+    //     console.log(user.get("Uploaded_Videos"))
+    // }
     return ( <
         Container >
         <
@@ -100,9 +114,6 @@ export default function UploadFile() {
         }
         spacing = {
             { base: 8 }
-        }
-        maxW = {
-            { lg: 'lg' }
         } >
         <
         Stack spacing = { 4 } >
@@ -168,7 +179,16 @@ export default function UploadFile() {
         /InputGroup> < /
         Stack > <
         Button onClick = {
-            () => submit(files)
+            async() => {
+                var outlink = await submit(files);
+                console.log(outlink, "Uploading to Moralis")
+                console.log("Posts havev been set to", posts)
+                await setPosts([...posts, outlink])
+                console.log("Posts havev been set to", posts)
+                setUserData({
+                    "Uploaded_Videos": posts
+                })
+            }
         }
         fontFamily = { 'heading' }
         mt = { 8 }
