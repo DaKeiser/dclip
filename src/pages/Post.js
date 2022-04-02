@@ -1,8 +1,11 @@
 import { Box, Button, Circle, GridItem, HStack, Image, Grid, Square, Text, VStack, Spacer, Avatar } from '@chakra-ui/react'
 import Container from '../components/Container'
 import { AiOutlineHeart, AiFillHeart, AiFillShopping, AiTwotoneMessage, AiOutlineShareAlt } from "react-icons/ai";
+import { secondaryTextColor } from '../styles/darkMode';
+import React, {useColorMode} from '@chakra-ui/react'
 
 export default function Post() {
+  const { colorMode } = useColorMode();
   return (
     <Container>
       <Grid
@@ -29,8 +32,13 @@ export default function Post() {
         </GridItem>
 
         <GridItem colSpan={6} w="100%">
-          <Box width="100%" m={12}>
+          <Box width="100%">
             <Text fontSize='4xl' fontWeight={800} mb={3}>Magnificient Piece of Shit</Text>
+            <Text fontSize='sm' fontWeight={300} mb={7} color={secondaryTextColor[colorMode]}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Quisque sit amet est sed turpis commodo varius. Duis in consectetur sem, sed facilisis sem. 
+              Integer pulvinar odio non nisi posuere sagittis. 
+            </Text>
 
             <Box display='flex'>
               <Box display='flex' mb={3}>
