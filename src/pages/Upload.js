@@ -1,4 +1,4 @@
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisQuery } from "react-moralis";
 import Container from '../components/Container'
 import VodApi from '../utils/LivepeerApi'
 
@@ -29,11 +29,6 @@ import {
 import Dropzone from '../components/Dropzone'
 
 const api = new VodApi(process.env.REACT_APP_API_KEY, process.env.REACT_APP_API_ENDPOINT);
-
-const UserDetails = () => {
-    const { refetchUserData, isUserUpdating, userError, user } = useMoralis();
-    return { refetchUserData, isUserUpdating, userError, user }
-}
 
 const submit = async(files) => {
     // console.log(user)
@@ -71,8 +66,8 @@ const submit = async(files) => {
     );
 
     console.log()
-    console.log("Returning NFT MEtadata as ", JSON.parse(JSON.stringify(result))["nftMetadataUrl"])
-    return result['nftMetadataUrl']
+    console.log("Returning NFT MEtadata as ", JSON.parse(JSON.stringify(result))["videoFileCid"])
+    return result['videoFileCid']
 
     // console.log(
     //     `5. Mint your NFT at:\n` +
@@ -85,12 +80,16 @@ const submit = async(files) => {
 export default function UploadFile() {
     const { colorMode } = useColorMode()
     const [files, setFiles] = useState(null);
-    const [posts, setPosts] = useState([]);
+    const { Moralis, isInitialized, setUserData, user, isAuthenticated } = useMoralis();
+    const { data, error, isLoading } = useMoralisQuery('Posts')
 
-    const { setUserData, refetchUserData, isUserUpdating, userError, user, isAuthenticated } = useMoralis();
-    // if (isAuthenticated) {
-    //     console.log(user.get("Uploaded_Videos"))
-    // }
+    if (error) {
+        throw (error);
+    }
+    if (!isLoading) {
+        console.log(data)
+    }
+
     return ( <
         Container >
         <
@@ -181,13 +180,40 @@ export default function UploadFile() {
         Button onClick = {
             async() => {
                 var outlink = await submit(files);
-                console.log(outlink, "Uploading to Moralis")
-                console.log("Posts havev been set to", posts)
-                await setPosts([...posts, outlink])
-                console.log("Posts havev been set to", posts)
-                setUserData({
-                    "Uploaded_Videos": posts
-                })
+
+
+                console.log("Before Submission: ", user.get("Uploaded_Videos"))
+
+                const Post = Moralis.Object.extend("Posts");
+                const post = new Post();
+
+                post.set("creator", user.get("username"));
+                post.set("creatorEth", user.get("ethAddress"));
+                post.set("cid", outlink)
+                post.set("owner", "");
+                post.set("ownerEth", "");
+
+
+                post.save()
+                    .then((post) => {
+                        // Execute any logic that should take place after the object is saved.
+                        alert('New object created with objectId: ' + post.id);
+                        output.push(post.id)
+
+                        setUserData({
+                            "Uploaded_Videos": output
+                        })
+
+                        console.log("After Submission: ", user.get("Uploaded_Videos"))
+                    }, (error) => {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Moralis.Error with an error code and message.
+                        alert('Failed to create new object, with error code: ' + error.message);
+                    });
+
+                var output = user.get("Uploaded_Videos")
+
+
             }
         }
         fontFamily = { 'heading' }
