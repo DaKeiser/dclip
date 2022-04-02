@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Container from '../components/Container'
 import {Box, useColorMode, Flex, Heading, HStack, Text} from '@chakra-ui/react'
+import { primaryTextColor } from '../styles/darkMode';
 
 export default function Dashboard() {
 	const { colorMode } = useColorMode();
@@ -12,27 +13,43 @@ export default function Dashboard() {
 	}
 	return (
 		<Container>
-			<Flex>
-				<Box my={10} p={5} w={'1280px'} shadow='md' borderWidth='1px' borderRadius='lg'>
+			<Flex alignItems='center' w={{ sm: '420px', md: '680px', lg: '1024px' }}>
+				<Box my={10} p={5} maxW={{ sm: '420px', md: '620px', lg: '1024px' }} shadow='md' borderWidth='1px' borderRadius='lg'>
 					<Heading fontSize='sm'
 						bgGradient='radial(rgba(113,132,193,1), rgba(255,0,56,1))'
 						bgClip='text'
 					>
 						<strong>Explore Categories</strong>
 					</Heading>
-					<HStack my={5} spacing='15px'>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
-						<Box borderRadius="sm" Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+					<Flex 
+					overflow={'scroll'}
+					overflowY="none"
+					css={{
+						'&::-webkit-scrollbar': {
+							width: '4px',
+					  	},
+						'&::-webkit-scrollbar-track': {
+							width: '6px',
+					  	},
+						'&::-webkit-scrollbar-thumb': {
+							background: primaryTextColor[colorMode],
+							borderRadius: '24px',
+					  	},
+					}}>
+					<HStack my={5} spacing='15px' >
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
+						<Box borderRadius="sm" minW='100px' Box shadow='md' borderWidth='1px' h='100px' d="inline-block" w="100px"/>
 					</HStack>
+					</Flex>
 				</Box>
 			</Flex>
 			<Box width="980">

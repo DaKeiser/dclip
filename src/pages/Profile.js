@@ -24,6 +24,7 @@ export default function Profile() {
 					direction={{ base: 'column' }}
 					rounded={'xl'}
 					spacing={4}
+					alignItems={'center'}
 				>
 					{/* User Image */}
 					<Skeleton isLoaded={imageLoad} boxSize='220px' borderRadius='lg'>
@@ -66,11 +67,11 @@ export default function Profile() {
 				{/* Username, socials, display flex */}
 				<Flex
 					alignItems='center'
-					direction={{ base: 'row', lg: 'column' }}
+					direction={{ base: 'column', lg: 'column' }}
 				>
 					{/* Username, socials flex */}
 					<Flex>
-						<Box p={5} w={'980px'} shadow='md' borderWidth='1px' borderRadius='lg'>
+						<Box p={5} w={{ sm: '220px', md: '480px', lg: '980px' }} shadow='md' borderWidth='1px' borderRadius='lg'>
 							<Heading fontSize='3xl'
 								bgGradient='radial(rgba(113,132,193,1), rgba(255,0,56,1))'
 								bgClip='text'
