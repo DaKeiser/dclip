@@ -7,12 +7,11 @@ export default function Post() {
     <Container>
       <Grid
         templateColumns='repeat(12, 1fr)'
-        // templateColumns='repeat(5, 1fr)'
         width="100%"
       >
-        <GridItem colSpan={3} w="100%">
+        <GridItem colSpan={[1, 2, 3]} w="100%">
           <Box width="100%">
-            <VStack pt="50%" pl="60%">
+            <VStack pt="10%">
               <Button bg='lightgreen'>
                 <AiFillShopping />
               </Button>
@@ -62,25 +61,25 @@ export default function Post() {
           <Box width="100%">
             <Text fontSize="3xl">Recommended</Text>
             <VStack>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
-              <Box borderRadius='lg' borderWidth={2} w="100%" display='flex' overflow='hidden'>
-                <Image src="https://picsum.photos/100/100" p={3} ></Image>
-                <Text p={3}>Recommended</Text>
+              <Box borderRadius='lg' maxH={20} borderWidth={2} w="100%" display='flex' overflow='hidden'>
+                <Image src="https://picsum.photos/100/100" p={0} ></Image>
+                <Text p={1}>Recommended</Text>
               </Box>
             </VStack>
           </Box>

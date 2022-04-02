@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import PageNotFound from "./pages/PageNotFound"
 import Signup from "./pages/Signup";
+import Buy from "./pages/Buy";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/buy" element={<Buy />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   </BrowserRouter>
