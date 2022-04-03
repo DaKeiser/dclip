@@ -40,6 +40,7 @@ export default function Mint() {
                 params: {
                     "tokenURI": "https://ipfs.livepeer.com/ipfs/QmdzSfDkUUgzozKmzTuENGWANYcnmbCoQcLZNZxLokUuQ2",
                 },
+
             };
 
             const transaction = await Moralis.executeFunction(sendOptions);

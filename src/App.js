@@ -40,7 +40,7 @@ function App() {
         Route path = "/home"
         element = { < Homepage / > }
         /> <
-        Route path = "/profile"
+        Route path = "/profile/:username"
         element = { < Profile / > }
         /> <
         Route path = "/dashboard"
@@ -55,10 +55,7 @@ function App() {
         Route path = "*"
         element = { < PageNotFound / > }
         /> <
-        Route path = "/mint"
-        element = { < Mint / > }
-        /> < /
-        Routes > <
+        /Routes> <
         /BrowserRouter>
     );
 }
