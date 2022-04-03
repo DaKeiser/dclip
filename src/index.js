@@ -68,7 +68,7 @@ ReactDOM.render(
         >
             <ColorModeScript />
             <GlobalStyle>
-              <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL} masterKey={MASTER_KEY} dangerouslyUseOfMasterKey='true'>
+              <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
                   <App />
               </MoralisProvider>
             </GlobalStyle>

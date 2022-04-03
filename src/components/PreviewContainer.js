@@ -31,5 +31,4 @@ const PreviewContainer = (props) => {
         /Box>   
     )
 }
-
 export default PreviewContainer;

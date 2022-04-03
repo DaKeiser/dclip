@@ -4,6 +4,8 @@ import { Box, useColorMode, Flex, Heading, HStack, Button, Link } from '@chakra-
 import { primaryTextColor, secondaryTextColor } from '../styles/darkMode';
 import { AddIcon } from '@chakra-ui/icons';
 import PreviewContainer from '../components/PreviewContainer';
+import { useMoralis,useMoralisQuery} from 'react-moralis';
+import { useState } from 'react';
 
 export default function Dashboard() {
     const { colorMode } = useColorMode();

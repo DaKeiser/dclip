@@ -20,9 +20,13 @@ import { useState } from 'react';
 export default function Signup() {
     const { authenticate, user } = useMoralis();
     const [uname, setUsername] = useState(null);
-    const handleChange = (event) => setUsername(event.target.value)
+    const handleChange = (event) => {
+        setUsername(event.target.value)
+        console.log(uname);
+    }
     const onClickEvent = () => {
         authenticate()
+        console.log(uname);
         user.set("username", uname);
     }
     return (
@@ -45,10 +49,10 @@ export default function Signup() {
                     boxShadow={'lg'}
                     p={8}>
                     <Stack spacing={4}>
-                    <FormControl id="email">
+                    {/* <FormControl id="email">
                         <FormLabel>Username</FormLabel>
                         <Input onChange={handleChange} type="username" />
-                    </FormControl>
+                    </FormControl> */}
                     <Stack spacing={10}>
                         <Button
                         bg={'blue.400'}

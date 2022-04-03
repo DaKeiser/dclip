@@ -11,6 +11,7 @@ import {
 import { useMoralis } from "react-moralis";
 import { primaryTextColor } from '../styles/darkMode';
 
+
 const truncateAddress = (address) => {
     return address.length>10 ? address.slice(0, 6) + "..." + address.slice(-4): address;
 };
@@ -19,6 +20,8 @@ const Login = () => {
 
     const { authenticate, logout, isAuthenticated, user } = useMoralis();
     const { colorMode } = useColorMode();
+
+    
 
     if (isAuthenticated) {
         return (
@@ -40,7 +43,7 @@ const Login = () => {
                     <MenuList>
                             <MenuItem
                                 as={Link}                            
-                                href="/profile" 
+                                href={"/profile/"  + user.get('username')}
                                 isExternal
                                 color={primaryTextColor[colorMode]}
                             >
