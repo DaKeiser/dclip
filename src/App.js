@@ -45,9 +45,6 @@ function App() {
         Route path = "/dashboard"
         element = { < Dashboard / > }
         /> <
-        Route path = "/signup"
-        element = { < Signup / > }
-        /> <
         Route path = "/buy"
         element = { < Buy / > }
         /> <

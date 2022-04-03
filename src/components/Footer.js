@@ -13,7 +13,7 @@ import { secondaryTextColor, linkColor } from '../styles/darkMode';
 
 const Copyright = (props) => (
     <Text fontSize="sm" {...props}>
-        &copy; {new Date().getFullYear()} EveNFT. All rights reserved.
+        &copy; {new Date().getFullYear()} dClip. All rights reserved.
     </Text>
 )
 
@@ -39,6 +39,7 @@ return (
         base: '4',
         md: '8',
     }}
+    mt={12}
 >
         <Stack
             direction={{

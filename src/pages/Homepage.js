@@ -47,6 +47,8 @@ export default function Homepage() {
                 py={{ base: 16, md: 18, lg: '50px' }}
                 direction={{ base: 'column', md: 'row' }}
                 maxW={{ base: 80, md: 1000, lg: 1250  }}
+                mt={12}
+                mb={12}
             >
                 <Stack 
                     flex={1} 
@@ -62,20 +64,18 @@ export default function Homepage() {
                             as={'span'}
                             position={'relative'}
                         >
-                            Write once,
+                            Clip.Mint.
                         </Text>
                         <br />
                         <Text as={'span'}
                             bgGradient='linear(to-l, #FF0080, #7928CA)'
                             bgClip='text'
                         >
-                            use everywhere!
+                            Cherish!
                         </Text>
                     </Heading>
                     <Text color={secondaryTextColor[colorMode]}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Quisque sit amet est sed turpis commodo varius. Duis in consectetur sem, sed facilisis sem. 
-                        Integer pulvinar odio non nisi posuere sagittis. 
+                        If you're a gamer or a singer or a meme lord, dClip is for you. Mint your favourite clips into NFTs and earn an audience & crypto! 
                     </Text>
                     <Stack
                         spacing={{ base: 4, sm: 6 }}
@@ -100,7 +100,7 @@ export default function Homepage() {
                             px={6}
                             bgGradient="linear(to-r, red.400,pink.400)"
                             color={'white'}
-                            href={isAuthenticated ? "/dashboard" : "/signup"}
+                            href={"/dashboard"}
                             _hover={{
                                 bgGradient: 'linear(to-r, red.600,pink.600)',
                                 boxShadow: 'xl',

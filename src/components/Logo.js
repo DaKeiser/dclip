@@ -6,7 +6,7 @@ const Logo = () => {
     const { colorMode } = useColorMode()
     return (
         <Box p={8} pb={4}>
-            <Heading color={primaryTextColor[colorMode]}>Web3 Tiktok</Heading>
+            <Heading color={primaryTextColor[colorMode]}>dClip.</Heading>
         </Box>
     )
 };
