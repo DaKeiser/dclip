@@ -12,7 +12,6 @@ import Homepage from "./pages/Homepage"
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import PageNotFound from "./pages/PageNotFound"
-import Signup from "./pages/Signup";
 import Buy from "./pages/Buy";
 import Mint from "./pages/mint";
 
@@ -45,9 +44,6 @@ function App() {
         /> <
         Route path = "/dashboard"
         element = { < Dashboard / > }
-        /> <
-        Route path = "/signup"
-        element = { < Signup / > }
         /> <
         Route path = "/buy"
         element = { < Buy / > }
