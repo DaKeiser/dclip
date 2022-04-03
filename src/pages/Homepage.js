@@ -18,11 +18,13 @@ import Container from '../components/Container'
 import { iconColor, shadowColor, linkColor, secondaryTextColor, navBgColorAlt, primaryTextColor } from '../styles/darkMode';
 import { FaHeart } from 'react-icons/fa';
 import React, {useState} from 'react';
+import { useMoralis } from 'react-moralis';
 
 export default function Homepage() {
     const {colorMode} = useColorMode()
     const [likes, setLikes] = useState(326);
     const [updated, setUpdate] = useState(false);
+    const { isAuthenticated } = useMoralis();
 
     const updateLikes = () => {
         if(!updated) {
@@ -98,7 +100,7 @@ export default function Homepage() {
                             px={6}
                             bgGradient="linear(to-r, red.400,pink.400)"
                             color={'white'}
-                            href="/signup" 
+                            href={isAuthenticated ? "/dashboard" : "/signup"}
                             _hover={{
                                 bgGradient: 'linear(to-r, red.600,pink.600)',
                                 boxShadow: 'xl',

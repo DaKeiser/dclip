@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import React from 'react';
 import Page1 from './pages/Page1'
+import Page2 from './pages/Page2'
 import Post from './pages/Post'
 import UploadFile from "./pages/Upload";
 import Homepage from "./pages/Homepage"
@@ -20,6 +21,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/page1" element={<Page1 />} />
+      <Route path="/page2" element={<Page2 />} />
       <Route path="/post" element={<Post />} />
       <Route path="/upload" element={<UploadFile />} />
       <Route path="/home" element={<Homepage />} />

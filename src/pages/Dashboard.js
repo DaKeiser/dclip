@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Container from '../components/Container'
-import {Box, useColorMode, Flex, Heading, HStack, Text} from '@chakra-ui/react'
-import { primaryTextColor } from '../styles/darkMode';
+import {Box, useColorMode, Flex, Heading, HStack, Button, Link} from '@chakra-ui/react'
+import { primaryTextColor, secondaryTextColor } from '../styles/darkMode';
+import { AddIcon } from '@chakra-ui/icons';
+import PreviewContainer from '../components/PreviewContainer';
 
 export default function Dashboard() {
 	const { colorMode } = useColorMode();
@@ -26,14 +28,14 @@ export default function Dashboard() {
 					overflowY="none"
 					css={{
 						'&::-webkit-scrollbar': {
-							width: '4px',
+							width: '1px',
 					},
 						'&::-webkit-scrollbar-track': {
-							width: '6px',
+							width: '2px',
 					},
 						'&::-webkit-scrollbar-thumb': {
-							background: primaryTextColor[colorMode],
-							borderRadius: '24px',
+							background: 'gray',
+							borderRadius: '4px',
 					},
 					}}>
 					<HStack my={5} spacing='15px' >
@@ -52,6 +54,24 @@ export default function Dashboard() {
 					</Flex>
 				</Box>
 			</Flex>
+			<Button
+				as={Link}  
+				leftIcon={<AddIcon />}                          
+				rounded={'lg'}
+				size={'lg'}
+				fontWeight={'normal'}
+				px={6}
+				bgGradient="linear(to-r, red.400,pink.400)"
+				color={'white'}
+				href={"/upload"}
+				mb={5}
+				_hover={{
+					bgGradient: 'linear(to-r, red.600,pink.600)',
+					boxShadow: 'xl',
+					textDecoration: 'none'
+			}}>
+				Create a Post
+			</Button>
 			<Box width="980">
 				<Box
 					padding={4}
@@ -64,7 +84,7 @@ export default function Dashboard() {
 					ml={1}
 				>
 					{srces.map((src) => (
-						<Box borderRadius="lg" Box shadow='md' borderWidth='1px' h={parseInt(src.slice(-3))} d="inline-block" w="100%" mb={2}>{src.slice(-3)}</Box>
+						<PreviewContainer src={src}/>
 					))}
 				</Box>
 			</Box>
