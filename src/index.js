@@ -16,6 +16,7 @@ import { MoralisProvider } from "react-moralis";
 
 const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID
 const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL
+const MASTER_KEY = process.env.REACT_APP_masterKey;
 
 
 const GlobalStyle = ({ children }) => {
@@ -67,7 +68,7 @@ ReactDOM.render(
         >
             <ColorModeScript />
             <GlobalStyle>
-              <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
+              <MoralisProvider appId={APP_ID} serverUrl={SERVER_URL} masterKey={MASTER_KEY} dangerouslyUseOfMasterKey='true'>
                   <App />
               </MoralisProvider>
             </GlobalStyle>

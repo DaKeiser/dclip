@@ -2,18 +2,39 @@ import { Box, Button, Circle, GridItem, Heading, Center, HStack, IconButton, But
 import Container from '../components/Container'
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import { primaryTextColor, secondaryBg, secondaryTextColor } from '../styles/darkMode'
-import React, {useState} from 'react';
+import { useParams } from "react-router-dom";
+import React, {useLayoutEffect, useState, useEffect} from 'react';
+import { useMoralisQuery } from 'react-moralis';
+import {Moralis} from 'moralis';
+import PageNotFound from './PageNotFound';
+
+const serverUrl = process.env.REACT_APP_MORALIS_SERVER_URL;
+const appId = process.env.REACT_APP_MORALIS_APPLICATION_ID;
+const masterKey = process.env.REACT_APP_masterKey;
+
 
 export default function Profile() {
 	const { colorMode } = useColorMode();
+	const [data, setData] = useState(null);
 	const [imageLoad, setImageLoad] = useState(false);
+	var params = useParams();
+	useEffect(() => {
+		const getUsers = async () => {
+			await Moralis.start({ serverUrl, appId, masterKey });
+			return await Moralis.Cloud.run("GetAllUsers", params=params);
+		}
+		getUsers().then(res => setData(res)).catch(console.error);
+	}, []);
+
 	var srces = []
 	for(var i=0;i<20;i++) {
 	  	var h = parseInt(Math.random() * 500)
 	  	var w = parseInt(Math.random() * 500)
 		srces.push(`https://picsum.photos/${w}/${h}`)
 	}
-    return (
+    return (	
+		
+		(data == null) ? <h2>Loading...</h2> : (data.length == 0 ? <PageNotFound /> :
 		<Container>
 			<Stack
 				direction={{ base: 'column', lg: 'row' }}
@@ -76,7 +97,7 @@ export default function Profile() {
 								bgGradient='radial(rgba(113,132,193,1), rgba(255,0,56,1))'
 								bgClip='text'
 							>
-								@username
+								{params.username}
 							</Heading>
 							<Text mt={4}>
 								(metamask wallet address)
@@ -105,5 +126,6 @@ export default function Profile() {
 				</Flex>
 			</Stack>
 		</Container>
+		)
 	)
 }

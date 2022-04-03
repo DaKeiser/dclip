@@ -25,7 +25,7 @@ function App() {
       <Route path="/post" element={<Post />} />
       <Route path="/upload" element={<UploadFile />} />
       <Route path="/home" element={<Homepage />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/:username" element={<Profile />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/buy" element={<Buy />} />
