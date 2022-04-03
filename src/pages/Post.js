@@ -10,11 +10,11 @@ export default function Post() {
 
     // Using HTTPS
     const web3 = createAlchemyWeb3(
-        "https://eth-mainnet.alchemyapi.io/v2/demo",
+        "https://eth-ropsten.alchemyapi.io/v2/o7VdM1uuPIyf3f7DGROx9CTx8BbDP52K",
     );
 
     var getnfts = async() => {
-        const nfts = await web3.alchemy.getNfts({ owner: "0xC33881b8FD07d71098b440fA8A3797886D831061" })
+        const nfts = await web3.alchemy.getNfts({ owner: "0x0052967B43Ea364Cf900049B6C695B824787Ff63" })
         console.log(nfts);
         return nfts;
     }
