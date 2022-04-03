@@ -4,9 +4,50 @@ import {Box, useColorMode, Flex, Heading, HStack, Button, Link} from '@chakra-ui
 import { primaryTextColor, secondaryTextColor } from '../styles/darkMode';
 import { AddIcon } from '@chakra-ui/icons';
 import PreviewContainer from '../components/PreviewContainer';
+import { useMoralis,useMoralisQuery} from 'react-moralis';
+import { useState } from 'react';
 
 export default function Dashboard() {
 	const { colorMode } = useColorMode();
+
+	// const {  } = useMoralis();
+	const { Moralis, setUserData, authenticate, user } = useMoralis();
+	// const [uname, setUsername] = useState(null);
+	// const handleChange = (event) => setUsername(event.target.value)
+	const onClickEvent = () => {
+	// 	authenticate()
+		
+		// if(uname) {
+		// 	user.set("username", uname);
+		// }
+
+		const NewUser = Moralis.Object.extend("Users");
+		// NewUser
+		const _newUser = new NewUser();
+		_newUser.set('ethAddress', user.get('ethAddress'))
+		_newUser.set('username', "")
+		_newUser.set('owned', 0)
+		_newUser.set('created', 0)
+		_newUser.save()
+		console.log("_newUser ", _newUser)
+		.then((_newUser) => {
+			// Execute any logic that should take place after the object is saved.
+			alert('New object created with objectId: ' + _newUser.username);
+			// output.push(post.id)
+
+			// setUserData({
+			//     "Uploaded_Videos": output
+			// })
+
+			// console.log("After Submission: ", user.get("Uploaded_Videos"))
+		}, (error) => {
+			// Execute any logic that should take place if the save fails.
+			// error is a Moralis.Error with an error code and message.
+			alert('Failed to create new object, with error code: ' + error.message);
+		});
+	}
+	onClickEvent()
+
 	var srces = []
 	for(var i=0;i<20;i++) {
 	  	var h = parseInt(Math.random() * 500)
