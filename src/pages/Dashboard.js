@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Container from '../components/Container'
-import { Box, useColorMode, Flex, Heading, HStack, Text } from '@chakra-ui/react'
-import { primaryTextColor } from '../styles/darkMode';
-import { useMoralis, useMoralisQuery } from "react-moralis";
+import { Box, useColorMode, Flex, Heading, HStack, Button, Link } from '@chakra-ui/react'
+import { primaryTextColor, secondaryTextColor } from '../styles/darkMode';
+import { AddIcon } from '@chakra-ui/icons';
+import PreviewContainer from '../components/PreviewContainer';
 
 export default function Dashboard() {
     const { colorMode } = useColorMode();
@@ -12,30 +13,17 @@ export default function Dashboard() {
         var w = parseInt(Math.random() * 500)
         srces.push(`https://picsum.photos/${w}/${h}`)
     }
-
-    const { data, error, isLoading } = useMoralisQuery('Posts')
-
-    if (error) {
-        throw (error);
-    }
-    if (!isLoading) {
-        console.log(data)
-    }
-
-
     return ( <
         Container >
         <
         Flex alignItems = 'center'
         w = {
-            { sm: '420px', md: '680px', lg: '1024px' }
-        } >
+            { sm: '420px', md: '680px', lg: '1024px' } } >
         <
         Box my = { 10 }
         p = { 5 }
         maxW = {
-            { sm: '420px', md: '620px', lg: '1024px' }
-        }
+            { sm: '420px', md: '620px', lg: '1024px' } }
         shadow = 'md'
         borderWidth = '1px'
         borderRadius = 'lg' >
@@ -44,21 +32,21 @@ export default function Dashboard() {
         bgGradient = 'radial(rgba(113,132,193,1), rgba(255,0,56,1))'
         bgClip = 'text' >
         <
-        strong > Explore Categories < /strong> < /
-        Heading > <
+        strong > Explore Categories < /strong> <
+        /Heading> <
         Flex overflow = { 'scroll' }
         overflowY = "none"
         css = {
             {
                 '&::-webkit-scrollbar': {
-                    width: '4px',
+                    width: '1px',
                 },
                 '&::-webkit-scrollbar-track': {
-                    width: '6px',
+                    width: '2px',
                 },
                 '&::-webkit-scrollbar-thumb': {
-                    background: primaryTextColor[colorMode],
-                    borderRadius: '24px',
+                    background: 'gray',
+                    borderRadius: '4px',
                 },
             }
         } >
@@ -154,10 +142,29 @@ export default function Dashboard() {
         d = "inline-block"
         w = "100px" / >
         <
-        /HStack> < /
-        Flex > <
-        /Box> < /
-        Flex > <
+        /HStack> <
+        /Flex> <
+        /Box> <
+        /Flex> <
+        Button as = { Link }
+        leftIcon = { < AddIcon / > }
+        rounded = { 'lg' }
+        size = { 'lg' }
+        fontWeight = { 'normal' }
+        px = { 6 }
+        bgGradient = "linear(to-r, red.400,pink.400)"
+        color = { 'white' }
+        href = { "/upload" }
+        mb = { 5 }
+        _hover = {
+            {
+                bgGradient: 'linear(to-r, red.600,pink.600)',
+                boxShadow: 'xl',
+                textDecoration: 'none'
+            }
+        } >
+        Create a Post <
+        /Button> <
         Box width = "980" >
         <
         Box padding = { 4 }
@@ -167,21 +174,16 @@ export default function Dashboard() {
         maxW = "980px"
         mx = "auto"
         sx = {
-            { columnCount: [1, 2, 3], columnGap: "8px" }
-        }
-        ml = { 1 } > {
+            { columnCount: [1, 2, 3], columnGap: "8px" } }
+        ml = { 1 } >
+        {
             srces.map((src) => ( <
-                Box borderRadius = "lg"
-                Box shadow = 'md'
-                borderWidth = '1px'
-                h = { parseInt(src.slice(-3)) }
-                d = "inline-block"
-                w = "100%"
-                mb = { 2 } > { src.slice(-3) } < /Box>
+                PreviewContainer src = { src }
+                />
             ))
         } <
-        /Box> < /
-        Box > <
+        /Box> <
+        /Box> <
         /Container>
     );
 }
