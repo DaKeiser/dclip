@@ -81,14 +81,16 @@ export default function UploadFile() {
     const { colorMode } = useColorMode()
     const [files, setFiles] = useState(null);
     const { Moralis, isInitialized, setUserData, user, isAuthenticated } = useMoralis();
-    const { data, error, isLoading } = useMoralisQuery('Posts')
-
-    if (error) {
-        throw (error);
-    }
-    if (!isLoading) {
-        console.log(data)
-    }
+    // const { data, error, isLoading } = useMoralisQuery('Posts')
+    // Moralis.authenticate().then(function(user) {
+    //         console.log(user.get('ethAddress'))
+    //     })
+    // if (error) {
+    //     throw (error);
+    // }
+    // if (!isLoading) {
+    //     console.log(data)
+    // }
 
     return ( <
         Container >
